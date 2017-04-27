@@ -1,0 +1,10 @@
+<div style="border-right: 4px groove gainsboro;padding-right: 0px;" class="media-list col-sm-4 col-md-4 col-lg-4">
+  <div [employeeHighlight]="employee===employeeSelected" *ngFor="let employee of employees">
+    <div class="highlight">
+      <employee-item [employee]="employee" (employeeSelect)="onEmployeeSelect($event)"></employee-item>
+    </div>
+  </div>
+</div>
+<a (click)="onEmployeeCreate()" href="#" style="position: absolute;left: 25%; top: 30%">
+  <img alt="addEmployee" src="./src/assets/add.png" />
+</a>

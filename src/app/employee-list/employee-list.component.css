@@ -1,0 +1,11 @@
+.employee-selected{
+    background: rgba(113,146,198,0.5);
+}
+.employee-selected .highlight{
+  position: relative;
+  z-index: -1;
+}
+
+.employee-hovering{
+    border-bottom: 5px groove red;
+}

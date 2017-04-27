@@ -1,0 +1,119 @@
+<div style="padding-top: 20px;" class="col-sm-8 col-md-8 col-lg-8">
+  <div class="col-sm-10 col-md-10 col-lg-10">
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="input-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" formControlName="firstName">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group">
+            <label for="subDivision">Sub Division</label>
+            <input type="text" class="form-control" id="subDivision" formControlName="subDivision">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" formControlName="lastName">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group">
+            <label for="status">Status</label>
+            <input type="text" class="form-control" id="status" formControlName="status">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group">
+            <label for="gender">Gender</label>
+            <input type="text" class="form-control" id="gender" formControlName="gender">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group">
+            <label for="suspendDate">Suspend Date</label>
+            <input type="date" class="form-control" id="suspendDate" formControlName="suspendDate">
+            <div style="background: none; vertical-align: bottom;border-top: 0;border-left: 0;border-right: 0;" class="input-group-addon">
+              <img src="./src/assets/calendar.png" alt="date" />
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group">
+            <label for="dob">Date Of Birth</label>
+            <input type="date" class="form-control" id="dob" formControlName="dob">
+            <div style="background: none; vertical-align: bottom;border-top: 0;border-left: 0;border-right: 0;" class="input-group-addon">
+              <img src="./src/assets/calendar.png" alt="date" />
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group">
+            <label for="hiredDate">Hired Date</label>
+            <input type="date" class="form-control" id="hiredDate" formControlName="hiredDate">
+            <div style="background: none; vertical-align: bottom;border-top: 0;border-left: 0;border-right: 0;" class="input-group-addon">
+              <img src="./src/assets/calendar.png" alt="date" />
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group">
+            <label for="nationality">Nationality</label>
+            <input type="text" class="form-control" id="nationality" formControlName="nationality">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group">
+            <label for="grade">Grade</label>
+            <select class="form-control" id="grade" formControlName="grade">
+              <option value="SE-JP">SE-JP</option>
+              <option value="SE-JP">SE-PG</option>
+              <option value="SE-JP">SE-AP</option>
+              <option value="SE-JP">SE-AN</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group">
+            <label for="maritalStatus">Marital Status</label>
+            <input type="text" class="form-control" id="maritalStatus" formControlName="maritalStatus">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group">
+            <label for="division">Division</label>
+            <select class="form-control" id="division" formControlName="division">
+              <option value="SWD-Red">SWD-Red</option>
+              <option value="SWD-Blue">SWD-Blue</option>
+              <option value="SWD-Pink">SWD-Pink</option>
+              <option value="SWD-Green">SWD-Green</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group">
+            <label for="phone">Phone</label>
+            <input type="text" class="form-control" id="phone" formControlName="phone">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="input-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email" formControlName="email">
+          </div>
+        </div>
+        <button type="submit" class="btn" [disabled]="!form.valid">Save</button>
+      </div>
+    </form>
+  </div>
+  <div class="col-sm-2 col-md-2 col-lg-2 image-upload">
+    <label for="file-input">
+      <img *ngIf="imageUrlTemp==null" src="./src/assets/profile.png" alt="profile">
+      <img *ngIf="imageUrlTemp" [src]="imageUrlTemp" alt="profile">
+    </label>
+    <input id="file-input" type="file" (change)="onImageChoose($event)" accept=".jpg,.png,.jpeg">
+  </div>
+</div>

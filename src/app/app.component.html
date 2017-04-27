@@ -1,0 +1,6 @@
+<main-header></main-header>
+<employee-toolbar (employeeDelete)="c.showChildModal($event)" (employeeSorting)="onEmployeeSorting($event)" [employee]="employeeSelected"></employee-toolbar>
+<content-navbar></content-navbar>
+<employee-list [employeeSaved]="employeeSaved" (employeeCreate)="onEmployeeCreate($event)" [employeeDeleted]="employeeDeleted" [employeeSorted]="employeeSorted" (employeeSelect)="onEmployeeSelect($event)"></employee-list>
+<employee-form (employeeSave)="onEmployeeSave($event)" [employeeSelected]="employeeSelected"></employee-form>
+<popup (employeeDelete)="onEmployeeDelete($event)" #c="childPopup"></popup>

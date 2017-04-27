@@ -1,0 +1,16 @@
+<div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Delete confirmation</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure want to delete employee?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="hideChildModal()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onEmployeeDelete()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

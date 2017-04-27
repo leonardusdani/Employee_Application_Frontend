@@ -1,0 +1,20 @@
+<div (click)="onEmployeeSelect()" class="media" style="padding: 10px 0 10px 10px;">
+  <div class="media-left">
+    <a href="#">
+      <img class="media-object" src="./src/assets/profile.png" alt="aa">
+    </a>
+  </div>
+  <div class="media-body">
+    <h5 class="media-heading"><strong>{{employee.firstName}} {{employee.lastName}}</strong></h5>
+    <span>{{employee.grade}}, {{employee.division}}</span><br>
+    <span>{{employee.location}}, {{employee.phone}}</span>
+  </div>
+  <div class="media-right">
+    <div>
+      <span>{{employee.hiredDate | date: "dd MMM yyyy"}}</span>
+      <a href="#">
+        <img class="media-object" src="./src/assets/btn_click.png" alt="bb">
+      </a>
+    </div>
+  </div>  
+</div>

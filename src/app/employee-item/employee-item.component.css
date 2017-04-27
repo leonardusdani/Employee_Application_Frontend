@@ -1,0 +1,12 @@
+/*.media-body {
+  width: 50%;
+}*/
+
+.media{
+  border-bottom: 5px groove gainsboro;
+  cursor: pointer;
+}
+
+.employee-hovering{
+    background-color: red;
+}
