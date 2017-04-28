@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit ,Output  } from '@angular/core';
 
+import { Employee } from '../employee';
+
 @Component({
   selector: 'employee-item',
   templateUrl: './employee-item.component.html',
@@ -7,7 +9,7 @@ import { Component, EventEmitter, Input, OnInit ,Output  } from '@angular/core';
 })
 export class EmployeeItemComponent implements OnInit {
 
-  @Input() employee;
+  @Input() employee:Employee;
   @Output() employeeSelect = new EventEmitter();
 
   constructor() {}
@@ -15,6 +17,8 @@ export class EmployeeItemComponent implements OnInit {
   ngOnInit() {}
 
   onEmployeeSelect(){
+    console.log("first");
+    console.log(this.employee);
     this.employeeSelect.emit(this.employee);
   }
   

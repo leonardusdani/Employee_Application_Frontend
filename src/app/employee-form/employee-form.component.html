@@ -37,7 +37,7 @@
             <label for="suspendDate">Suspend Date</label>
             <input type="date" class="form-control" id="suspendDate" formControlName="suspendDate">
             <div style="background: none; vertical-align: bottom;border-top: 0;border-left: 0;border-right: 0;" class="input-group-addon">
-              <img src="./src/assets/calendar.png" alt="date" />
+              <img src="./assets/calendar.png" alt="date" />
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@
             <label for="dob">Date Of Birth</label>
             <input type="date" class="form-control" id="dob" formControlName="dob">
             <div style="background: none; vertical-align: bottom;border-top: 0;border-left: 0;border-right: 0;" class="input-group-addon">
-              <img src="./src/assets/calendar.png" alt="date" />
+              <img src="./assets/calendar.png" alt="date" />
             </div>
           </div>
         </div>
@@ -55,7 +55,7 @@
             <label for="hiredDate">Hired Date</label>
             <input type="date" class="form-control" id="hiredDate" formControlName="hiredDate">
             <div style="background: none; vertical-align: bottom;border-top: 0;border-left: 0;border-right: 0;" class="input-group-addon">
-              <img src="./src/assets/calendar.png" alt="date" />
+              <img src="./assets/calendar.png" alt="date" />
             </div>
           </div>
         </div>
@@ -105,13 +105,21 @@
             <input type="text" class="form-control" id="email" formControlName="email">
           </div>
         </div>
+        <div class="col-lg-6">
+          <div class="input-group">
+            <label for="location">Location</label>
+            <select type="text" class="form-control" id="location" formControlName="location">
+              <option *ngFor="let location of locations" value="{{location._links.location.href}}">{{location.city}}</option>
+            </select>
+          </div>
+        </div>
         <button type="submit" class="btn" [disabled]="!form.valid">Save</button>
       </div>
     </form>
   </div>
   <div class="col-sm-2 col-md-2 col-lg-2 image-upload">
     <label for="file-input">
-      <img *ngIf="imageUrlTemp==null" src="./src/assets/profile.png" alt="profile">
+      <img *ngIf="imageUrlTemp==null" src="./assets/profile.png" alt="profile">
       <img *ngIf="imageUrlTemp" [src]="imageUrlTemp" alt="profile">
     </label>
     <input id="file-input" type="file" (change)="onImageChoose($event)" accept=".jpg,.png,.jpeg">

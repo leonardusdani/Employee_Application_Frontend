@@ -10,9 +10,33 @@ import {Employee} from './employee'
 export class EmployeeService {
 
   private employeeUrl = "api/employees";
+  private locationUrl = "api/locations";
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http:Http) { }
+
+  updateLocation(linkUpdate, linkSource):void{
+    let headersUpdate = new Headers({'Content-Type': 'text/uri-list'});
+    this.http.put(linkUpdate,linkSource,headersUpdate);
+  }
+
+  getLocation(urlLocation:string):Promise<Location>{
+    return this.http.get(urlLocation)
+               .toPromise()
+               .then((response) => {
+                 return response.json() as Location;
+                })
+               .catch(this.handleError);
+  }
+
+  getLocations():Promise<Location[]>{
+    return this.http.get(this.locationUrl)
+               .toPromise()
+               .then((response) => {
+                 return response.json()._embedded.locations as Location[];
+                })
+               .catch(this.handleError);
+  }
 
   uploadImage(imageFile: File,imageName:string):Promise<any>{
     let formData:FormData = new FormData();
@@ -53,7 +77,15 @@ export class EmployeeService {
   get():Promise<Employee[]>{
     return this.http.get(this.employeeUrl)
                .toPromise()
-               .then(response => response.json()._embedded.employees as Employee[])
+               .then(response => {
+                 let employees: Employee[] = response.json()._embedded.employees as Employee[];
+                 for(let employee of employees){
+                   this.getLocation(employee._links.location.href).then(res=>{
+                     employee.location = res;
+                   });
+                 }
+                 return employees;
+                })
                .catch(this.handleError);
   }
 

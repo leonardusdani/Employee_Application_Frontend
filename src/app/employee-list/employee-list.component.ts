@@ -22,7 +22,10 @@ export class EmployeeListComponent implements OnInit, OnChanges {
   constructor(private employeeService: EmployeeService) { }
 
   ngOnInit() {
-    this.employeeService.get().then(employees => this.employees = employees);
+    this.employeeService.get().then((employees) => {
+      this.employees = employees;
+      console.log(this.employees);
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -54,6 +57,9 @@ export class EmployeeListComponent implements OnInit, OnChanges {
 
 
   onEmployeeSelect(employee){
+    console.log("second");
+    console.log(employee);
+
     this.employeeSelected = employee;
     this.employeeSelect.emit(employee);
   }

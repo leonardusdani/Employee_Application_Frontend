@@ -14,7 +14,7 @@ export class Employee {
     division: string;
     phone: string;
     email: string; 
-    location: string;
+    location: Location;
     imagePath: string;
     _links: any;
 }

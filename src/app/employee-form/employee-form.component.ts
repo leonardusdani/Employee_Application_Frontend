@@ -22,6 +22,8 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   imageFile : File;
   imageUrlTemp: any;
   imageName:string;
+
+  locations: Location[];
   
   @Input() employeeSelected : Employee;
   @Output() employeeSave = new EventEmitter();
@@ -33,6 +35,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.initializeForm();
+
   }
 
   ngOnChanges(){
@@ -51,7 +54,8 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
         maritalStatus: this.employeeSelected.maritalStatus,
         division: this.employeeSelected.division,
         phone: this.employeeSelected.phone,
-        email: this.employeeSelected.email
+        email: this.employeeSelected.email,
+        location: this.employeeSelected.location
       }); 
       this.imageUrlTemp = this.employeeSelected.imagePath;
     }
@@ -123,6 +127,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     }
 
     initializeForm(){
+        this.employeeService.getLocations().then(locations => this.locations = locations);
         this.form = this.formBuilder.group({
         firstName: this.formBuilder.control('',Validators.required),
         subDivision: this.formBuilder.control(''),
@@ -137,9 +142,11 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
         maritalStatus: this.formBuilder.control(''),
         division: this.formBuilder.control(''),
         phone: this.formBuilder.control(''),
-        email: this.formBuilder.control('')
+        email: this.formBuilder.control(''),
+        location: this.formBuilder.control('')
       });
       this.imageUrlTemp = undefined;
+      
     }
 
 
