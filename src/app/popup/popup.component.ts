@@ -43,7 +43,6 @@ export class PopupComponent implements OnInit {
   }
  
   showChildModal(employee) {
-    console.log(employee);
     this.employee = employee;
     this.childModal.show();
   }
@@ -76,6 +75,7 @@ export class PopupComponent implements OnInit {
 
   onSubmit(filter){
     this.employeeFilter.emit(filter);
+    this.childModalFilter.hide();
   }
   
 

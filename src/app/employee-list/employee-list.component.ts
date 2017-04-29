@@ -36,8 +36,6 @@ export class EmployeeListComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if(this.employeeDeleted == undefined && this.employeeSaved == undefined && this.employees!=undefined){
-      //this.employeeService.getAllSortByLastName(changes.employeeSorted.currentValue).then(employees => this.employees = employees);
-      console.log(this.employeeSorted);
       if(this.employeeSorted=="asc"){
         this.employees = this.employees.sort((a, b) => {
         if (a.lastName < b.lastName) return -1;
@@ -52,16 +50,22 @@ export class EmployeeListComponent implements OnInit, OnChanges {
     }else if(this.employeeDeleted!=undefined){
       this.employeeService.delete(this.employeeDeleted)
       .then(() => {
-        this.employeeService.get().then(employees => this.employees = employees);
-        this.employeeCounter.emit(this.employees.length);
+        this.employeeService.get().then(employees => {
+          this.employees = employees
+          this.employeeCounter.emit(this.employees.length);
+          console.log(this.employees.length);
+        });
+        
         this.employeeDeleted = undefined;
       });
     }else if(this.employeeSaved!=undefined){
       if(this.employeeSaved._links==undefined){
         this.employeeService.create(this.employeeSaved)
         .then(employeeResult => {
-          this.employeeService.get().then(employees => this.employees = employees);
-          this.employeeCounter.emit(this.employees.length);
+          this.employeeService.get().then(employees => {
+            this.employees = employees
+            this.employeeCounter.emit(this.employees.length);
+          });   
           this.employeeSaved= undefined;
         });
       }else{
@@ -107,6 +111,7 @@ export class EmployeeListComponent implements OnInit, OnChanges {
         return employee.gender==filter.gender;
       });
     }
+    this.employeeCounter.emit(this.employees.length);
   }
 
 }
