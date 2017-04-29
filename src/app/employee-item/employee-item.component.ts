@@ -17,8 +17,6 @@ export class EmployeeItemComponent implements OnInit {
   ngOnInit() {}
 
   onEmployeeSelect(){
-    console.log("first");
-    console.log(this.employee);
     this.employeeSelect.emit(this.employee);
   }
   

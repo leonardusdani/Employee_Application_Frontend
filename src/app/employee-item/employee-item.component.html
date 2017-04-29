@@ -7,7 +7,7 @@
   <div class="media-body">
     <h5 class="media-heading"><strong>{{employee.firstName}} {{employee.lastName}}</strong></h5>
     <span>{{employee.grade}}, {{employee.division}}</span><br>
-    <span>{{employee.location}}, {{employee.phone}}</span>
+    <span>{{employee.location?.city}}, {{employee.phone}}</span>
   </div>
   <div class="media-right">
     <div>

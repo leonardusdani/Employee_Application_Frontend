@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { Http, Headers } from '@angular/http';
+import { Http, Headers,Response,RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
+import { Observable }       from 'rxjs/Observable';
+
 import {Employee} from './employee'
+import {Location} from './location';
 
 @Injectable()
 export class EmployeeService {
@@ -15,9 +18,17 @@ export class EmployeeService {
 
   constructor(private http:Http) { }
 
-  updateLocation(linkUpdate, linkSource):void{
-    let headersUpdate = new Headers({'Content-Type': 'text/uri-list'});
-    this.http.put(linkUpdate,linkSource,headersUpdate);
+  updateLocation(linkUpdate, linkSource):Promise<any>{
+    let headersUpdate = new Headers({ 'Content-Type': 'text/uri-list' });
+    let options = new RequestOptions({ headers: headersUpdate });
+    console.log("SHOULD UPDATE");
+    return this.http.put(linkUpdate,linkSource,options)
+      .toPromise()
+      .then((res: Response) => {
+        console.log(res);
+        return res.json();
+      })
+      .catch(this.handleError);
   }
 
   getLocation(urlLocation:string):Promise<Location>{
@@ -48,13 +59,17 @@ export class EmployeeService {
   }
 
   update(employee): Promise<Employee> {
+    console.log(JSON.stringify(employee));
+    //this.updateLocation(employee._links.location.href,employee.location);
   return this.http
     .put(employee._links.self.href, JSON.stringify(employee), {headers: this.headers})
     .toPromise()
     .then(res => {
+      
       return res.json().data as Employee;
     })
     .catch(this.handleError);
+    
   }
 
   create(employee): Promise<Employee> {
@@ -78,13 +93,13 @@ export class EmployeeService {
     return this.http.get(this.employeeUrl)
                .toPromise()
                .then(response => {
-                 let employees: Employee[] = response.json()._embedded.employees as Employee[];
+                 let employees: Employee[] = response.json()._embedded.employees;
                  for(let employee of employees){
                    this.getLocation(employee._links.location.href).then(res=>{
-                     employee.location = res;
+                     return employee.location = res;
                    });
                  }
-                 return employees;
+                 return employees as Employee[];
                 })
                .catch(this.handleError);
   }

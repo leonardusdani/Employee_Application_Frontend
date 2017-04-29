@@ -10,6 +10,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
+import {Location} from '../location';
+
 @Component({
   selector: 'employee-form',
   templateUrl: './employee-form.component.html',
@@ -55,7 +57,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
         division: this.employeeSelected.division,
         phone: this.employeeSelected.phone,
         email: this.employeeSelected.email,
-        location: this.employeeSelected.location
+        location: this.employeeSelected.location._links.location.href
       }); 
       this.imageUrlTemp = this.employeeSelected.imagePath;
     }

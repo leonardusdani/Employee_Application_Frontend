@@ -23,8 +23,7 @@ export class EmployeeListComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.employeeService.get().then((employees) => {
-      this.employees = employees;
-      console.log(this.employees);
+      this.employees = <Employee[]>employees;
     });
   }
 
@@ -45,6 +44,8 @@ export class EmployeeListComponent implements OnInit, OnChanges {
           this.employeeSaved= undefined;
         });
       }else{
+        console.log(this.employeeSaved);
+        this.employeeService.updateLocation(this.employeeSaved._links.location.href,this.employeeSaved.location).then(res=>{console.log(res)});
         this.employeeService.update(this.employeeSaved)
         .then(employeeResult=>{
           this.employeeService.get().then(employees => this.employees = employees);
@@ -57,8 +58,6 @@ export class EmployeeListComponent implements OnInit, OnChanges {
 
 
   onEmployeeSelect(employee){
-    console.log("second");
-    console.log(employee);
 
     this.employeeSelected = employee;
     this.employeeSelect.emit(employee);
