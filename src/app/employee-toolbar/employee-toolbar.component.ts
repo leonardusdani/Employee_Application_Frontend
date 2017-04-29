@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output,OnChanges } from '@angular/core';
 
 import { Employee } from '../employee';
 
@@ -11,14 +11,22 @@ import { Employee } from '../employee';
 export class EmployeeToolbarComponent implements OnInit {
 
   @Input() employee : any;
+  @Input() employeeCounter : any;
   @Output() employeeSorting = new EventEmitter();
   @Output() employeeDelete = new EventEmitter();
+  @Output() employeeFilter = new EventEmitter();
+  @Output() employeeSearch = new EventEmitter();
 
   employeeSorted = false;
 
   constructor() { }
 
+
   ngOnInit() { }
+
+  onEmployeeFilter(){
+    this.employeeFilter.emit();
+  }
 
   onEmployeeSorting(){
     if(this.employeeSorted==true){
@@ -32,6 +40,10 @@ export class EmployeeToolbarComponent implements OnInit {
 
   onEmployeeDelete(){
     this.employeeDelete.emit(this.employee);
+  }
+
+  onSearch(keyword){
+    this.employeeSearch.emit(keyword);
   }
 
 }

@@ -21,11 +21,9 @@ export class EmployeeService {
   updateLocation(linkUpdate, linkSource):Promise<any>{
     let headersUpdate = new Headers({ 'Content-Type': 'text/uri-list' });
     let options = new RequestOptions({ headers: headersUpdate });
-    console.log("SHOULD UPDATE");
     return this.http.put(linkUpdate,linkSource,options)
       .toPromise()
       .then((res: Response) => {
-        console.log(res);
         return res.json();
       })
       .catch(this.handleError);
@@ -104,8 +102,16 @@ export class EmployeeService {
                .catch(this.handleError);
   }
 
-  getAllSortByLastName(sortParam:String):Promise<Employee[]>{
+  getAllSortByLastName(sortParam:string):Promise<Employee[]>{
     const urlSort = `${this.employeeUrl}?sort=lastName,${sortParam}`;
+    return this.http.get(urlSort)
+               .toPromise()
+               .then(response => response.json()._embedded.employees as Employee[])
+               .catch(this.handleError);
+  }
+
+  search(keyword:string):Promise<Employee[]>{
+    const urlSort = `${this.employeeUrl}/search/findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase?firstName=${keyword}&lastName=${keyword}`;
     return this.http.get(urlSort)
                .toPromise()
                .then(response => response.json()._embedded.employees as Employee[])

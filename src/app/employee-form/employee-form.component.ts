@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { Employee } from '../employee'
 import { EmployeeService } from '../employee.service';
@@ -25,6 +25,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   imageUrlTemp: any;
   imageName:string;
 
+
   locations: Location[];
   
   @Input() employeeSelected : Employee;
@@ -37,7 +38,11 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.initializeForm();
+    
+  }
 
+  setDefaultValue(){
+    this.form.controls['location'].setValue(this.locations[0]._links.location.href);
   }
 
   ngOnChanges(){
@@ -128,8 +133,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       s4() + '-' + s4() + s4() + s4();
     }
 
-    initializeForm(){
-        this.employeeService.getLocations().then(locations => this.locations = locations);
+    initializeForm(){   
         this.form = this.formBuilder.group({
         firstName: this.formBuilder.control('',Validators.required),
         subDivision: this.formBuilder.control(''),
@@ -146,6 +150,10 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
         phone: this.formBuilder.control(''),
         email: this.formBuilder.control(''),
         location: this.formBuilder.control('')
+      });
+      this.employeeService.getLocations().then(locations => {
+        this.locations = locations;
+        this.setDefaultValue();
       });
       this.imageUrlTemp = undefined;
       

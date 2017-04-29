@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 
 import { Employee } from './employee';
 import {EmployeeFormComponent} from './employee-form/employee-form.component';
+import { EmployeeListComponent } from './employee-list/employee-list.component';
 
 
 @Component({
@@ -12,11 +13,17 @@ import {EmployeeFormComponent} from './employee-form/employee-form.component';
 export class AppComponent {
 
   @ViewChild(EmployeeFormComponent) employeeForm: EmployeeFormComponent;
+  @ViewChild(EmployeeListComponent) employeeList: EmployeeListComponent
 
   employeeSelected : any;
   employeeSorted : string;
   employeeDeleted : Employee;
   employeeSaved : Employee;
+  employeeCounter : any;
+
+  onEmployeeCounter(counter){
+    this.employeeCounter = counter;
+  }
 
   onEmployeeSelect(employee){
     this.employeeSelected = employee;
@@ -41,5 +48,14 @@ export class AppComponent {
     this.employeeSelected = undefined;
     this.employeeForm.initializeForm();
   }
+
+  onEmployeeFilter(filter){
+    this.employeeList.onEmployeeFilter(filter);
+  }
+
+  onEmployeeSearch(keyword){
+    this.employeeList.onEmployeeSearch(keyword);
+  }
+
 
 }

@@ -1,6 +1,6 @@
 <main-header></main-header>
-<employee-toolbar (employeeDelete)="c.showChildModal($event)" (employeeSorting)="onEmployeeSorting($event)" [employee]="employeeSelected"></employee-toolbar>
+<employee-toolbar (employeeSearch)="onEmployeeSearch($event)" (employeeFilter)="c.showFilterChildModal($event)" [employeeCounter]="employeeCounter" (employeeDelete)="c.showChildModal($event)" (employeeSorting)="onEmployeeSorting($event)" [employee]="employeeSelected"></employee-toolbar>
 <content-navbar></content-navbar>
-<employee-list [employeeSaved]="employeeSaved" (employeeCreate)="onEmployeeCreate($event)" [employeeDeleted]="employeeDeleted" [employeeSorted]="employeeSorted" (employeeSelect)="onEmployeeSelect($event)"></employee-list>
+<employee-list (employeeCounter)="onEmployeeCounter($event)" [employeeSaved]="employeeSaved" (employeeCreate)="onEmployeeCreate($event)" [employeeDeleted]="employeeDeleted" [employeeSorted]="employeeSorted" (employeeSelect)="onEmployeeSelect($event)"></employee-list>
 <employee-form (employeeSave)="onEmployeeSave($event)" [employeeSelected]="employeeSelected"></employee-form>
-<popup (employeeDelete)="onEmployeeDelete($event)" #c="childPopup"></popup>
+<popup (employeeFilter)="onEmployeeFilter($event)" (employeeDelete)="onEmployeeDelete($event)" #c="childPopup"></popup>

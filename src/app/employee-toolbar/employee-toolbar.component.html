@@ -3,7 +3,7 @@
     <a href="#" style="margin-right: 5px;">
       <img src="./assets/search.png" alt="search">
     </a>
-    <input class="form-control" size="12" type="text" style="border: 0;background: transparent;" placeholder="Search">
+    <input #search (keyup)="onSearch(search.value)" class="form-control" size="12" type="text" style="border: 0;background: transparent;" placeholder="Search">
   </div>
   <div class="col-sm-6 col-md-6 col-lg-6 form-inline pull-right">
     <a  *ngIf="employee" href="#" (click)="onEmployeeDelete()" style="padding-right: 5px;">
@@ -12,9 +12,9 @@
     <a (click)="onEmployeeSorting()" href="#" style="padding-right: 5px;">
       <img src="./assets/sort.png" alt="sort">
     </a>
-    <a href="#" style="padding-right: 5px;"> 
+    <a (click)="onEmployeeFilter()" href="#" style="padding-right: 5px;"> 
       <img src="./assets/filter.png" alt="filter">
     </a>
-    <input class="form-control" size="4" style="border-radius: 100px; text-align: center;" type="text">
+    <input [value]="employeeCounter" class="form-control" size="4" style="border-radius: 100px; text-align: center;" type="text">
   </div>  
 </div>
