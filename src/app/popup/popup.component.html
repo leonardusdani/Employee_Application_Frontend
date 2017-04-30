@@ -18,7 +18,7 @@
               <div class="form-group col-lg-8">
                 <label class="col-lg-2" for="location">Location</label>
                 <select class="col-lg-6" type="text" class="form-control" id="location" formControlName="location">
-                  <option *ngFor="let location of locations" value="{{location._links.location.href}}">{{location.city}}</option>
+                  <option *ngFor="let location of locations" value="{{location.locationId}}">{{location.city}}</option>
                   <option value="All">All</option>
                 </select>
               </div>

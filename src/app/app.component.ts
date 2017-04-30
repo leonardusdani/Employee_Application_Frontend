@@ -34,8 +34,10 @@ export class AppComponent {
     this.employeeSelected = undefined;
   }
   onEmployeeDelete(employee){
-    this.employeeDeleted = employee;
+    //this.employeeDeleted = employee;
+    this.employeeList.onEmployeeDelete(employee);
     this.employeeSelected = undefined;
+    this.employeeForm.initializeForm();
   }
 
   onEmployeeCreate(creating){
@@ -44,7 +46,7 @@ export class AppComponent {
   }
 
   onEmployeeSave(employee){
-    this.employeeSaved = employee;
+    this.employeeList.onEmployeeSave(employee);
     this.employeeSelected = undefined;
     this.employeeForm.initializeForm();
   }

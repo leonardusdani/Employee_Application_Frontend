@@ -17,7 +17,7 @@ export class EmployeeToolbarComponent implements OnInit {
   @Output() employeeFilter = new EventEmitter();
   @Output() employeeSearch = new EventEmitter();
 
-  employeeSorted = false;
+  employeeSorted = true;
 
   constructor() { }
 

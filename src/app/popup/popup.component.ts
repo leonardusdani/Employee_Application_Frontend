@@ -69,11 +69,12 @@ export class PopupComponent implements OnInit {
     }
 
     setDefaultValue(){
-    this.form.controls['location'].setValue(this.locations[0]._links.location.href);
+    this.form.controls['location'].setValue(this.locations[0].locationId);
     this.form.controls['gender'].setValue("Male");
   }
 
   onSubmit(filter){
+    console.log(filter);
     this.employeeFilter.emit(filter);
     this.childModalFilter.hide();
   }

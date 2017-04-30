@@ -27,16 +27,13 @@ export class EmployeeListComponent implements OnInit, OnChanges {
     this.employeeService.get().then((employees) => {
       this.employees = <Employee[]>employees;
       this.employeeCounter.emit(this.employees.length);
-      this.employees = this.employees.sort((a, b) => {
-      if (a.lastName < b.lastName) return -1;
-      else if (a.lastName > b.lastName) return 1;
-      else return 0;});
+      this.sortEmployees("asc");
     });
+    
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if(this.employeeDeleted == undefined && this.employeeSaved == undefined && this.employees!=undefined){
-      if(this.employeeSorted=="asc"){
+  sortEmployees(keyword){
+    if(keyword=="asc"){
         this.employees = this.employees.sort((a, b) => {
         if (a.lastName < b.lastName) return -1;
         else if (a.lastName > b.lastName) return 1;
@@ -47,19 +44,11 @@ export class EmployeeListComponent implements OnInit, OnChanges {
         else if (a.lastName < b.lastName) return 1;
         else return 0;});
       }
-    }else if(this.employeeDeleted!=undefined){
-      this.employeeService.delete(this.employeeDeleted)
-      .then(() => {
-        this.employeeService.get().then(employees => {
-          this.employees = employees
-          this.employeeCounter.emit(this.employees.length);
-          console.log(this.employees.length);
-        });
-        
-        this.employeeDeleted = undefined;
-      });
-    }else if(this.employeeSaved!=undefined){
-      if(this.employeeSaved._links==undefined){
+  }
+
+  onEmployeeSave(employee){
+    this.employeeSaved = employee;
+    if(this.employeeSaved._links==undefined){
         this.employeeService.create(this.employeeSaved)
         .then(employeeResult => {
           this.employeeService.get().then(employees => {
@@ -69,16 +58,37 @@ export class EmployeeListComponent implements OnInit, OnChanges {
           this.employeeSaved= undefined;
         });
       }else{
-        this.employeeService.updateLocation(this.employeeSaved._links.location.href,this.employeeSaved.location).then(res=>{console.log(res)});
-        this.employeeService.update(this.employeeSaved)
-        .then(employeeResult=>{
-          this.employeeService.get().then(employees => this.employees = employees);
-          this.employeeCounter.emit(this.employees.length);
-          this.employeeSaved= undefined;
+        this.employeeService.updateLocation(this.employeeSaved._links.location.href,this.employeeSaved.location).then(res=>{
+          this.employeeService.update(this.employeeSaved)
+          .then(employeeResult=>{
+            this.employeeService.get().then(employees => this.employees = employees);
+            this.employeeCounter.emit(this.employees.length);
+            this.employeeSaved= undefined;
+          });
         });
-      }
     }
     this.employeeSelect.emit(undefined);
+  }
+
+  onEmployeeDelete(employee){
+    this.employeeDeleted = employee;
+    this.employeeService.delete(this.employeeDeleted)
+      .then(() => {
+        this.employeeService.get().then(employees => {
+          this.employees = employees
+          this.employeeCounter.emit(this.employees.length);
+        });
+        
+        this.employeeDeleted = undefined;
+      });
+      this.employeeSelect.emit(undefined);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if(this.employeeDeleted == undefined && this.employeeSaved == undefined && this.employees!=undefined){
+      this.employeeSorted=="asc"?this.sortEmployees("asc"):this.sortEmployees("desc");
+      this.employeeSelect.emit(undefined);
+    }
   }
 
 
@@ -93,25 +103,25 @@ export class EmployeeListComponent implements OnInit, OnChanges {
   }
 
   onEmployeeSearch(keyword){
-    console.log(keyword);
     this.employeeService.search(keyword).then(employees => this.employees = employees);
   }
 
   onEmployeeFilter(filter){
     if(!(filter.gender=="All" && filter.location=="All")){
       this.employees = this.employees.filter(employee=>{
-        return (employee.gender==filter.gender && employee.location._links.location.href==filter.location);
+        return (employee.gender==filter.gender && employee.location.locationId==filter.location);
       });
-    }else if(filter.gender=="All"){
+    }else if(filter.gender=="All" && filter.location!="All"){
       this.employees = this.employees.filter(employee=>{
-        return employee.location._links.location.href==filter.location;
+        return employee.location.locationId==filter.location;
       });
-    }else if(filter.location=="All"){
+    }else if(filter.location=="All" && filter.gender!="All"){
       this.employees = this.employees.filter(employee=>{
         return employee.gender==filter.gender;
       });
     }
     this.employeeCounter.emit(this.employees.length);
+    console.log(filter);
   }
 
 }

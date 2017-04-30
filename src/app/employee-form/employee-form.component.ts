@@ -41,9 +41,6 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     
   }
 
-  setDefaultValue(){
-    this.form.controls['location'].setValue(this.locations[0]._links.location.href);
-  }
 
   ngOnChanges(){
     if(this.employeeSelected!=undefined){
@@ -62,16 +59,14 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
         division: this.employeeSelected.division,
         phone: this.employeeSelected.phone,
         email: this.employeeSelected.email,
-        location: this.employeeSelected.location._links.location.href
+        location: this.employeeSelected.location.locationId
       }); 
       this.imageUrlTemp = this.employeeSelected.imagePath;
-    }
-    else{
-      this.initializeForm();
     }
   }
 
   onSubmit(employee){
+    employee.location = this.locations.find(loc=>loc.locationId==employee.location)._links.location.href;
     if(this.employeeSelected==undefined){
       employee.imagePath = this.imageUrl;
       if(employee.imagePath!=undefined){
@@ -94,6 +89,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       if(employee.imagePath!=undefined && this.imageUrl!=undefined){
         this.employeeService.uploadImage(this.imageFile,this.imageUrl)
           .then(result=>{
+            console.log(employee);
             this.employeeSave.emit(employee);
             this.imageUrl = undefined;
             this.imageFile = undefined;
@@ -102,6 +98,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
             this.employeeSelected = undefined;
           });
       }else{
+        console.log(employee);
         this.employeeSave.emit(employee);
       }
     }
@@ -153,7 +150,10 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       });
       this.employeeService.getLocations().then(locations => {
         this.locations = locations;
-        this.setDefaultValue();
+        this.form.controls['location'].setValue(this.locations[0].locationId);
+        this.form.controls['grade'].setValue("SE-JP");
+        this.form.controls['division'].setValue("SWD-Red");
+        this.form.controls['gender'].setValue("Male");
       });
       this.imageUrlTemp = undefined;
       

@@ -88,23 +88,10 @@ export class EmployeeService {
   }
 
   get():Promise<Employee[]>{
-    let locations : Location[];
-    this.getLocations().then(res=>{
-      locations = res;
-      console.log(locations);
-    });
     return this.http.get(this.employeeUrl)
                .toPromise()
                .then(response => {
-                 let employees: Employee[] = response.json()._embedded.employees;
-                 for(let employee of employees){
-                    this.getLocation(employee._links.location.href).then(res=>{
-                      return employee.location = res;
-                    });
-                  //console.log(employee);
-                  //employee.location = locations.find(loc=>loc._links.location.href==);
-                 }
-                 return employees as Employee[];
+                 return response.json()._embedded.employees as Employee[];
                 })
                .catch(this.handleError);
   }

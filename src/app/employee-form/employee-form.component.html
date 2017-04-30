@@ -73,9 +73,9 @@
             <label for="grade">Grade</label>
             <select class="form-control" id="grade" formControlName="grade">
               <option value="SE-JP">SE-JP</option>
-              <option value="SE-JP">SE-PG</option>
-              <option value="SE-JP">SE-AP</option>
-              <option value="SE-JP">SE-AN</option>
+              <option value="SE-PG">SE-PG</option>
+              <option value="SE-AP">SE-AP</option>
+              <option value="SE-AN">SE-AN</option>
             </select>
           </div>
         </div>
@@ -112,7 +112,7 @@
           <div class="input-group">
             <label for="location">Location</label>
             <select type="text" class="form-control" id="location" formControlName="location">
-              <option *ngFor="let location of locations" value="{{location._links.location.href}}">{{location.city}}</option>
+              <option *ngFor="let location of locations" value="{{location.locationId}}">{{location.city}}</option>
             </select>
           </div>
         </div>

@@ -1,7 +1,7 @@
 <div (click)="onEmployeeSelect()" class="media" style="padding: 10px 0 10px 10px;">
   <div class="media-left">
     <a href="#">
-      <img width="10%" class="media-object" *ngIf="employee.imagePath==null" src="./assets/profile.png" alt="profile">
+      <img class="media-object" *ngIf="employee.imagePath==null" src="./assets/profile.png" alt="profile">
       <img class="media-object" *ngIf="employee.imagePath!=null" [src]="employee.imagePath" alt="profile">
       <!--img class="media-object" src="./assets/profile.png" alt="aa"-->
     </a>
@@ -9,7 +9,7 @@
   <div class="media-body">
     <h5 class="media-heading"><strong>{{employee.firstName}} {{employee.lastName}}</strong></h5>
     <span>{{employee.grade}}, {{employee.division}}</span><br>
-    <span>{{employee.location?.city}}, {{employee.phone}}</span>
+    <span>{{employee.location.city}}, {{employee.phone}}</span>
   </div>
   <div class="media-right">
     <div>
