@@ -48,3 +48,29 @@
     </div>
   </div>
 </div>
+
+<div bsModal #childModalImage="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Delete confirmation</h4>
+      </div>
+      <div class="modal-body">
+        <button (click)="onWell($event)">WELLL</button> 
+        <div class="file-upload">
+          <span class="text">upload</span>
+          <input id="custom-input" type="file" (change)="fileChangeListener($event)">
+        </div>
+        <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+        <br>
+        <!--<span class="result rounded" *ngIf="data.image" >
+          <img style="border-radius: 100px;" [src]="data.image" [width]="cropperSettings.width" [height]="cropperSettings.height">
+        </span>-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="hideChildModal()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onEmployeeDelete()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -14,6 +14,8 @@ import { EmployeeService } from './employee.service';
 import { EmployeeHighlightDirective } from './employee-highlight.directive';
 import { PopupComponent } from './popup/popup.component';
 import { ModalModule } from 'ngx-bootstrap';
+import {ImageCropperComponent} from 'ng2-img-cropper';
+
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { ModalModule } from 'ngx-bootstrap';
     EmployeeToolbarComponent,
     ContentNavbarComponent,
     EmployeeHighlightDirective,
-    PopupComponent
+    PopupComponent,
+    ImageCropperComponent
   ],
   imports: [
     BrowserModule,

@@ -4,3 +4,4 @@
 <employee-list (employeeCounter)="onEmployeeCounter($event)" [employeeSaved]="employeeSaved" (employeeCreate)="onEmployeeCreate($event)" [employeeDeleted]="employeeDeleted" [employeeSorted]="employeeSorted" (employeeSelect)="onEmployeeSelect($event)"></employee-list>
 <employee-form (employeeSave)="onEmployeeSave($event)" [employeeSelected]="employeeSelected"></employee-form>
 <popup (employeeFilter)="onEmployeeFilter($event)" (employeeDelete)="onEmployeeDelete($event)" #c="childPopup"></popup>
+<button (click)="c.showImageChildModal($event)">WEE</button>
