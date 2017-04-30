@@ -59,5 +59,8 @@ export class AppComponent {
     this.employeeList.onEmployeeSearch(keyword);
   }
 
+  onEmployeeUpload(event){
+    this.employeeForm.onChoose(event);
+  }
 
 }

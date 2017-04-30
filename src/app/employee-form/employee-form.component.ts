@@ -4,6 +4,8 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { Employee } from '../employee'
 import { EmployeeService } from '../employee.service';
 
+import { DomSanitizer } from '@angular/platform-browser';
+
 import { Http, Headers ,RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -34,7 +36,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
 
 
 
-  constructor(private formBuilder : FormBuilder, private employeeService : EmployeeService,private http:Http) { }
+  constructor(public sanitizer: DomSanitizer,private formBuilder : FormBuilder, private employeeService : EmployeeService,private http:Http) { }
 
   ngOnInit() {
     this.initializeForm();
@@ -117,6 +119,21 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       this.imageFile = event.target.files[0];
       reader.readAsDataURL(this.imageFile);
     }
+  }
+
+  onChoose(event){
+    console.log("FORM");
+    console.log(event);
+      var reader = new FileReader();
+
+      reader.onload = (event:any) => {
+        this.imageUrlTemp = event.target.result;
+      }
+      let imageType = event.blobTemp.type.split("/");
+      this.imageName = this.guid();
+      this.imageUrl = this.imageName.concat(".").concat(imageType[1]);
+      this.imageFile = event.fileTemp;
+      reader.readAsDataURL(this.imageFile);
   }
 
 

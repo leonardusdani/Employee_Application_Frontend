@@ -22,6 +22,7 @@ export class PopupComponent implements OnInit {
   
   @Output() employeeDelete = new EventEmitter();
   @Output() employeeFilter = new EventEmitter();
+  @Output() employeeUpload = new EventEmitter();
 
   @ViewChild('childModal') public childModal:ModalDirective;
   @ViewChild('childModalFilter') public childModalFilter:ModalDirective;
@@ -62,10 +63,16 @@ export class PopupComponent implements OnInit {
     .then(blob => {
       console.log(blob);
       var file = new File([blob], this.data.filename);
-    this.employeeService.uploadImage(file,this.data.filename)
-          .then(result=>{
-            console.log(result);
-          });
+      var outputtemp: {fileTemp:any,blobTemp:any}={fileTemp:file,blobTemp:blob};
+      
+      outputtemp.fileTemp = file;
+      outputtemp.blobTemp = blob;
+      this.employeeUpload.emit(outputtemp);
+      console.log(file);
+    // this.employeeService.uploadImage(file,this.data.filename)
+    //       .then(result=>{
+    //         console.log(result);
+    //       });
     this.childModalImage.hide();
 
     });
