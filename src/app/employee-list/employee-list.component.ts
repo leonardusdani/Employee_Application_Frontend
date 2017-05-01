@@ -110,7 +110,7 @@ export class EmployeeListComponent implements OnInit, OnChanges {
   }
 
   onEmployeeFilter(filter){
-    if(!(filter.gender=="All" && filter.location=="All")){
+    if(filter.gender!="All" && filter.location!="All"){
       this.employees = this.employees.filter(employee=>{
         return (employee.gender==filter.gender && employee.location.locationId==filter.location);
       });
@@ -124,7 +124,6 @@ export class EmployeeListComponent implements OnInit, OnChanges {
       });
     }
     this.employeeCounter.emit(this.employees.length);
-    console.log(filter);
   }
 
 }

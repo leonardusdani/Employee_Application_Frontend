@@ -1,0 +1,14 @@
+.nav > li > a:hover{
+    border: none;
+    background-color: rgba(255,0,0,0);
+    border-bottom: 5px solid red;
+}
+
+.nav > li > a:focus,
+.nav > li > .active > a:hover,
+.nav > li > .active > a:focus,
+.nav > li > .open > a {
+    border: none;
+    background-color: rgba(255,0,0,0);
+    border-bottom: 5px solid red;
+}

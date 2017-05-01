@@ -156,14 +156,14 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
         status: this.formBuilder.control(''),
         gender: this.formBuilder.control(''),
         suspendDate: this.formBuilder.control(''),
-        dob: this.formBuilder.control(''),
-        hiredDate: this.formBuilder.control(''),
-        nationality: this.formBuilder.control(''),
+        dob: this.formBuilder.control('',Validators.required),
+        hiredDate: this.formBuilder.control('',Validators.required),
+        nationality: this.formBuilder.control('',Validators.required),
         grade: this.formBuilder.control(''),
-        maritalStatus: this.formBuilder.control(''),
+        maritalStatus: this.formBuilder.control('',Validators.required),
         division: this.formBuilder.control(''),
-        phone: this.formBuilder.control(''),
-        email: this.formBuilder.control(''),
+        phone: this.formBuilder.control('',Validators.required),
+        email: this.formBuilder.control('',Validators.email),
         location: this.formBuilder.control('')
       });
       this.employeeService.getLocations().then(locations => {

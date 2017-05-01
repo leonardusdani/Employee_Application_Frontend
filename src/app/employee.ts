@@ -1,7 +1,7 @@
 import {Location} from './location';
 
 export class Employee {
-    id: number; 
+    id: string; 
     firstName: string;
     subDivision: string; 
     lastName: string;

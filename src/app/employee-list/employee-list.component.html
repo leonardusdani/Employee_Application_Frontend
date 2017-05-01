@@ -4,7 +4,10 @@
       <employee-item [employee]="employee" (employeeSelect)="onEmployeeSelect($event)"></employee-item>
     </div>
   </div>
+  <div *ngIf="employees==''" style="background-color: whitesmoke;text-align: center;padding-top: 20px;">
+    <p style="color: grey;">We couldn't find what you were looking for. </p>
+  </div>
 </div>
-<a (click)="onEmployeeCreate()" href="#" style="position: absolute;left: 25%; top: 30%">
-  <img alt="addEmployee" src="./assets/add.png" />
+<a (click)="onEmployeeCreate()" href="#" style="position: absolute;left: 25%; top: 30%;">
+  <img alt="addEmployee" src="./assets/add.png" style="border-radius: 100px;" />
 </a>

@@ -59,12 +59,10 @@ export class PopupComponent implements OnInit {
   
 
   onWell(){
-    //var imageBase64 = "image base64 data";
     if(this.data.image){
     fetch(this.data.image)
     .then(res => res.blob())
     .then(blob => {
-      //console.log(blob);
       var file = new File([blob], this.data.filename);
       var outputtemp: {fileTemp:any,blobTemp:any}={fileTemp:file,blobTemp:blob};
       
@@ -75,28 +73,12 @@ export class PopupComponent implements OnInit {
       
     
       this.data = {};
-      //this.cropper.settings = this.cropperSettings;
-      //console.log(file);
-    // this.employeeService.uploadImage(file,this.data.filename)
-    //       .then(result=>{
-    //         console.log(result);
-    //       });
     this.childModalImage.hide();
 
   });
     }
     this.showCanvas = true;
     this.childModalImage.hide();
-    //console.log(this.data);
-    //var blob = new Blob([this.data.image], {type: this.data.type});
-    //var file = new File([blob], this.data.filename);
-    //console.log("RESULT");
-    //console.log(file);
-    // this.employeeService.uploadImage(file,this.data.filename)
-    //       .then(result=>{
-    //         //console.log(result);
-    //       });
-    // this.childModalImage.hide();
 }
  
 fileChangeListener(event) {
@@ -114,12 +96,6 @@ fileChangeListener(event) {
     myReader.readAsDataURL(file);
     this.data.type = file.type;
     this.data.filename = file.name;
-    //console.log(file);
-    
-    // this.employeeService.uploadImage(image,"test.jpg")
-    //       .then(result=>{
-    //         console.log(result);
-    //       });
 }
 hideChildImageModal() {
     this.childModalImage.hide();
@@ -177,7 +153,6 @@ hideChildImageModal() {
   }
 
   onSubmit(filter){
-    console.log(filter);
     this.employeeFilter.emit(filter);
     this.childModalFilter.hide();
   }

@@ -3,7 +3,7 @@
     <div class="modal-content">
       <form class="form-horizontal" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
       <div class="modal-header col-lg-12">
-        <h4 class="modal-title pull-left">Filter confirmation</h4>
+        <h4 class="modal-title pull-left">Filter employees</h4>
       </div>
       <div class="modal-body col-lg-12">
         
@@ -42,8 +42,8 @@
         Are you sure want to delete employee?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" (click)="hideChildModal()">Close</button>
-        <button type="button" class="btn btn-primary" (click)="onEmployeeDelete()">Save changes</button>
+        <button type="button" class="btn btn-default" (click)="hideChildModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="onEmployeeDelete()">Ok</button>
       </div>
     </div>
   </div>
@@ -53,22 +53,18 @@
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title pull-left">Delete confirmation</h4>
+        <h4 class="modal-title pull-left">Upload profile picture</h4>
       </div>
       <div class="modal-body">
-        <!--<button (click)="onWell($event)">WELLL</button> -->
         <div class="file-upload">
           <input id="custom-input" type="file" (change)="fileChangeListener($event)" accept=".jpg,.png,.jpeg">
         </div>
         <img-cropper [hidden]="showCanvas" #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
         <br>
-        <!--<span class="result rounded" *ngIf="data.image" >
-          <img style="border-radius: 100px;" [src]="data.image" [width]="cropperSettings.width" [height]="cropperSettings.height">
-        </span>-->
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" (click)="hideChildImageModal()">Close</button>
-        <button type="button" class="btn btn-primary" (click)="onWell($event)">Save changes</button>
+        <button type="button" class="btn btn-default" (click)="hideChildImageModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="onWell($event)">Save</button>
       </div>
     </div>
   </div>
