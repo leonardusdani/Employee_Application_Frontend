@@ -33,6 +33,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   @Input() employeeSelected : Employee;
   @Output() employeeSave = new EventEmitter();
   @Output() employeeUpdate = new EventEmitter();
+  @Output() employeeUpload = new EventEmitter();
 
 
 
@@ -41,6 +42,10 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.initializeForm();
     
+  }
+
+  onEmployeeUpload(){
+    this.employeeUpload.emit();
   }
 
 
@@ -91,7 +96,6 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       if(employee.imagePath!=undefined && this.imageUrl!=undefined){
         this.employeeService.uploadImage(this.imageFile,this.imageUrl)
           .then(result=>{
-            console.log(employee);
             this.employeeSave.emit(employee);
             this.imageUrl = undefined;
             this.imageFile = undefined;
@@ -100,7 +104,6 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
             this.employeeSelected = undefined;
           });
       }else{
-        console.log(employee);
         this.employeeSave.emit(employee);
       }
     }
@@ -122,8 +125,6 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   }
 
   onChoose(event){
-    console.log("FORM");
-    console.log(event);
       var reader = new FileReader();
 
       reader.onload = (event:any) => {

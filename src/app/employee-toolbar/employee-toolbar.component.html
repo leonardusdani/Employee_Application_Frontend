@@ -1,20 +1,20 @@
-<div style="background-color: #5C6AC0;padding-top: 5px; padding-bottom: 5px; border-right: 3px groove gainsboro" class="col-sm-4 col-md-4 col-lg-4">
-  <div class="col-sm-6 col-md-6 col-lg-6 form-inline">
-    <a href="#" style="margin-right: 5px;">
-      <img src="./assets/search.png" alt="search">
-    </a>
-    <input #search (keyup)="onSearch(search.value)" class="form-control" size="12" type="text" style="border: 0;background: transparent;" placeholder="Search">
+<div style="background-color: #5C6AC0;padding-top: 5px; padding-bottom: 4px; border-right: 3px groove gainsboro" class="col-sm-6 col-md-5 col-lg-4">
+  <div class="col-sm-6 col-md-6 col-lg-6 pull-left" style="padding-right: 0px;padding-left: 0px;">
+    <img style="margin-top: 6px;" class="pull-left" src="./assets/search.png" alt="search">
+    <div style="padding-right: 0px; padding-left: 0px;" class="col-lg-10 col-md-10 col-sm-10 pull-left">
+      <input #search (keyup)="onSearch(search.value)" class="form-control" type="text" style="border: 0;background: transparent;" placeholder="Search">
+    </div>
   </div>
   <div class="col-sm-6 col-md-6 col-lg-6 form-inline pull-right">
-    <a  *ngIf="employee" href="#" (click)="onEmployeeDelete()" style="padding-right: 5px;">
-      <img src="./assets/delete.png" alt="delete">
-    </a>
-    <a (click)="onEmployeeSorting()" href="#" style="padding-right: 5px;">
-      <img src="./assets/sort.png" alt="sort">
-    </a>
-    <a (click)="onEmployeeFilter()" href="#" style="padding-right: 5px;"> 
+      <input [value]="employeeCounter" disabled class="form-control pull-right" size="2" style="border-radius: 100px; text-align: center;margin-top: 1px;" type="text">
+    <a class="pull-right" (click)="onEmployeeFilter()" href="#" style="padding-right: 8px; margin-top: 6px;"> 
       <img src="./assets/filter.png" alt="filter">
     </a>
-    <input [value]="employeeCounter" class="form-control" size="4" style="border-radius: 100px; text-align: center;" type="text">
+    <a class="pull-right" (click)="onEmployeeSorting()" href="#" style="padding-right: 8px; margin-top: 6px;">
+      <img src="./assets/sort.png" alt="sort">
+    </a>
+    <a class="pull-right" *ngIf="employee" href="#" (click)="onEmployeeDelete()" style="padding-right: 8px;margin-top: 6px;">
+      <img src="./assets/delete.png" alt="delete">
+    </a>
   </div>  
 </div>

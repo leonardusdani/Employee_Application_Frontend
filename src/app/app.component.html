@@ -2,6 +2,5 @@
 <employee-toolbar (employeeSearch)="onEmployeeSearch($event)" (employeeFilter)="c.showFilterChildModal($event)" [employeeCounter]="employeeCounter" (employeeDelete)="c.showChildModal($event)" (employeeSorting)="onEmployeeSorting($event)" [employee]="employeeSelected"></employee-toolbar>
 <content-navbar></content-navbar>
 <employee-list (employeeCounter)="onEmployeeCounter($event)" [employeeSaved]="employeeSaved" (employeeCreate)="onEmployeeCreate($event)" [employeeDeleted]="employeeDeleted" [employeeSorted]="employeeSorted" (employeeSelect)="onEmployeeSelect($event)"></employee-list>
-<employee-form (employeeSave)="onEmployeeSave($event)" [employeeSelected]="employeeSelected"></employee-form>
+<employee-form (employeeUpload)="c.showImageChildModal($event)" (employeeSave)="onEmployeeSave($event)" [employeeSelected]="employeeSelected"></employee-form>
 <popup (employeeUpload)="onEmployeeUpload($event)" (employeeFilter)="onEmployeeFilter($event)" (employeeDelete)="onEmployeeDelete($event)" #c="childPopup"></popup>
-<button (click)="c.showImageChildModal($event)">WEE</button>

@@ -30,6 +30,8 @@ export class PopupComponent implements OnInit {
 
   employee : Employee;
 
+  showCanvas = true;
+
   locations: Location[];
 
   data:any;
@@ -43,8 +45,8 @@ export class PopupComponent implements OnInit {
 
         this.cropperSettings.width = 200;
         this.cropperSettings.height = 200;
-        this.cropperSettings.croppedWidth =48;
-        this.cropperSettings.croppedHeight = 48;
+        this.cropperSettings.croppedWidth =64;
+        this.cropperSettings.croppedHeight = 64;
         this.cropperSettings.canvasWidth = 200;
         this.cropperSettings.canvasHeight = 200;
         this.cropperSettings.cropperDrawSettings.strokeColor = 'rgba(255,255,255,1)';
@@ -58,24 +60,33 @@ export class PopupComponent implements OnInit {
 
   onWell(){
     //var imageBase64 = "image base64 data";
+    if(this.data.image){
     fetch(this.data.image)
     .then(res => res.blob())
     .then(blob => {
-      console.log(blob);
+      //console.log(blob);
       var file = new File([blob], this.data.filename);
       var outputtemp: {fileTemp:any,blobTemp:any}={fileTemp:file,blobTemp:blob};
       
       outputtemp.fileTemp = file;
       outputtemp.blobTemp = blob;
       this.employeeUpload.emit(outputtemp);
-      console.log(file);
+      
+      
+    
+      this.data = {};
+      //this.cropper.settings = this.cropperSettings;
+      //console.log(file);
     // this.employeeService.uploadImage(file,this.data.filename)
     //       .then(result=>{
     //         console.log(result);
     //       });
     this.childModalImage.hide();
 
-    });
+  });
+    }
+    this.showCanvas = true;
+    this.childModalImage.hide();
     //console.log(this.data);
     //var blob = new Blob([this.data.image], {type: this.data.type});
     //var file = new File([blob], this.data.filename);
@@ -89,6 +100,7 @@ export class PopupComponent implements OnInit {
 }
  
 fileChangeListener(event) {
+  this.showCanvas = false;
     var image:any = new Image();
     var file:File = event.target.files[0];
     var myReader:FileReader = new FileReader();
@@ -102,13 +114,17 @@ fileChangeListener(event) {
     myReader.readAsDataURL(file);
     this.data.type = file.type;
     this.data.filename = file.name;
-    console.log(file);
+    //console.log(file);
     
     // this.employeeService.uploadImage(image,"test.jpg")
     //       .then(result=>{
     //         console.log(result);
     //       });
 }
+hideChildImageModal() {
+    this.childModalImage.hide();
+    this.showCanvas = true;
+  }
 
 
 

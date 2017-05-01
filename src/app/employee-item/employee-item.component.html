@@ -1,8 +1,8 @@
 <div (click)="onEmployeeSelect()" class="media" style="padding: 10px 0 10px 10px;">
   <div class="media-left">
     <a href="#">
-      <img class="media-object" *ngIf="employee.imagePath==null" src="./assets/profile.png" alt="profile">
-      <img class="media-object" *ngIf="employee.imagePath!=null" [src]="employee.imagePath" alt="profile">
+      <img style="border-radius: 100px;" class="media-object" *ngIf="employee.imagePath==null" src="./assets/profile.png" alt="profile">
+      <img style="border-radius: 100px;" class="media-object" *ngIf="employee.imagePath!=null" [src]="employee.imagePath" alt="profile">
       <!--img class="media-object" src="./assets/profile.png" alt="aa"-->
     </a>
   </div>
