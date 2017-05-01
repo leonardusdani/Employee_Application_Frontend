@@ -103,7 +103,10 @@ export class EmployeeListComponent implements OnInit, OnChanges {
   }
 
   onEmployeeSearch(keyword){
-    this.employeeService.search(keyword).then(employees => this.employees = employees);
+    this.employeeService.search(keyword).then(employees => {
+      this.employees = employees;
+      this.employeeCounter.emit(this.employees.length);
+    });
   }
 
   onEmployeeFilter(filter){

@@ -58,7 +58,7 @@
       <div class="modal-body">
         <!--<button (click)="onWell($event)">WELLL</button> -->
         <div class="file-upload">
-          <input id="custom-input" type="file" (change)="fileChangeListener($event)">
+          <input id="custom-input" type="file" (change)="fileChangeListener($event)" accept=".jpg,.png,.jpeg">
         </div>
         <img-cropper [hidden]="showCanvas" #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
         <br>

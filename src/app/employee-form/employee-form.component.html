@@ -1,6 +1,7 @@
-<div style="padding-top: 20px;" class="col-sm-6 col-md-7 col-lg-8">
-  <div class="col-sm-9 col-md-10 col-lg-10">
-    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+<div style="padding-left: 0px;padding-top: 20px;padding-right: 0px;" class="col-sm-6 col-md-7 col-lg-8">
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+  <div style="padding-left: 20px;" class="col-sm-9 col-md-10 col-lg-10">
+    
       <div class="row">
         <div class="col-lg-6">
           <div class="input-group">
@@ -90,7 +91,7 @@
             <label for="division">Division</label>
             <select class="form-control" id="division" formControlName="division">
               <option value="SWD-Red">SWD-Red</option>
-              <option value="SWD-Blue">SWD-Blue</option>
+              <option value="CDC-AsteRx">CDC-AsteRx</option>
               <option value="SWD-Pink">SWD-Pink</option>
               <option value="SWD-Green">SWD-Green</option>
             </select>
@@ -116,9 +117,10 @@
             </select>
           </div>
         </div>
-        <button type="submit" class="btn" [disabled]="!form.valid">Save</button>
+        
       </div>
-    </form>
+      
+    
   </div>
   <div (click)="onEmployeeUpload()" class="col-sm-2 col-md-2 col-lg-2 image-upload">
     <label for="file-input">
@@ -127,4 +129,9 @@
     </label>
     <!--<input hidden id="file-input" type="file" (change)="onImageChoose($event)" accept=".jpg,.png,.jpeg">-->
   </div>
+  <div style="background-color: #5C6AC0;padding-left: 0px;padding-bottom: 5px;padding-top: 5px;" class="col-lg-12 col-sm-12 col-md-12">
+      <button type="submit" class="btn btn-danger pull-right" [disabled]="!form.valid">Save</button>
+      <button type="button" (click)="initializeForm()" class="btn btn-default pull-right" style="margin-right: 10px;">Cancel</button>
+  </div>
+  </form>
 </div>
