@@ -20,6 +20,7 @@ export class EmployeeListComponent implements OnInit, OnChanges {
 
   employeeSelected : any;
   employees: Employee[];
+  employeesTemp : Employee[];
 
   constructor(private employeeService: EmployeeService) { }
 
@@ -106,17 +107,19 @@ export class EmployeeListComponent implements OnInit, OnChanges {
     this.employeeService.search(keyword).then(employees => {
       this.employees = employees;
       this.employeeCounter.emit(this.employees.length);
+      this.employeesTemp = this.employees;
     });
   }
 
   onEmployeeFilter(filter){
+    this.employees = this.employeesTemp;
     if(filter.gender!="All" && filter.location!="All"){
       this.employees = this.employees.filter(employee=>{
         return (employee.gender==filter.gender && employee.location.locationId==filter.location);
       });
     }else if(filter.gender=="All" && filter.location!="All"){
       this.employees = this.employees.filter(employee=>{
-        return employee.location.locationId==filter.location;
+        return Number(employee.location.locationId)==Number(filter.location);
       });
     }else if(filter.location=="All" && filter.gender!="All"){
       this.employees = this.employees.filter(employee=>{
