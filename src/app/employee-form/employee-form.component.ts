@@ -153,7 +153,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
         firstName: this.formBuilder.control('',Validators.required),
         subDivision: this.formBuilder.control(''),
         lastName: this.formBuilder.control(''),
-        status: this.formBuilder.control(''),
+        status: this.formBuilder.control('',Validators.required),
         gender: this.formBuilder.control(''),
         suspendDate: this.formBuilder.control(''),
         dob: this.formBuilder.control('',Validators.required),

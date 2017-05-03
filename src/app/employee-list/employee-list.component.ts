@@ -19,6 +19,7 @@ export class EmployeeListComponent implements OnInit, OnChanges {
 
 
   employeeSelected : any;
+  employeesTemp:Employee[];
   employees: Employee[];
 
   constructor(private employeeService: EmployeeService) { }
@@ -103,13 +104,16 @@ export class EmployeeListComponent implements OnInit, OnChanges {
   }
 
   onEmployeeSearch(keyword){
+    this.employeeSelect.emit(undefined);
     this.employeeService.search(keyword).then(employees => {
       this.employees = employees;
       this.employeeCounter.emit(this.employees.length);
+      this.employeesTemp = this.employees;
     });
   }
 
   onEmployeeFilter(filter){
+    this.employees = this.employeesTemp;
     if(filter.gender!="All" && filter.location!="All"){
       this.employees = this.employees.filter(employee=>{
         return (employee.gender==filter.gender && employee.location.locationId==filter.location);
@@ -122,6 +126,8 @@ export class EmployeeListComponent implements OnInit, OnChanges {
       this.employees = this.employees.filter(employee=>{
         return employee.gender==filter.gender;
       });
+    }else{
+      this.employees = this.employees;
     }
     this.employeeCounter.emit(this.employees.length);
   }
